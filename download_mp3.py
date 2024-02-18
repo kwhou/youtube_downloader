@@ -9,8 +9,9 @@ def get_mp3(url):
 
     ## Get video title and replace non-alphanumeric characters
     video_title = yt.title
-    video_title = re.sub('[^0-9a-zA-Z\s_-]+', '-', video_title).strip('- \t')
-    print('Title {}'.format(video_title))
+    video_title = re.sub('[^0-9a-zA-Z\s_-]+', '', video_title).strip('- \t')
+    video_title = re.sub('\s+', ' ', video_title)
+    print('Title: {}'.format(video_title))
 
     ## Download video
     print('Downloading {}'.format(url))
