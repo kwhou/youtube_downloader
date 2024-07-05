@@ -8,7 +8,7 @@ def get_mp4(url):
 
     ## Get video title and replace non-alphanumeric characters
     video_title = yt.title
-    video_title = re.sub('[^0-9a-zA-Z\s_-\\u4e00-\\u9fff]+', '', video_title).strip('- \t')
+    video_title = re.sub('[^\w\s\\u4e00-\\u9fff]+', ' ', video_title).strip('- \t')
     video_title = re.sub('\s+', ' ', video_title)
     print('Title: {}'.format(video_title))
 
