@@ -1,9 +1,8 @@
 from pytube import YouTube
-from pydub import AudioSegment
 import re
 import os
 
-def get_mp3(url):
+def get_mp4(url):
     ## Create yt object
     yt = YouTube(url)
 
@@ -15,14 +14,7 @@ def get_mp3(url):
 
     ## Download video
     print('Downloading {}'.format(url))
-    yt.streams.filter().get_audio_only().download(filename=video_title+".mp4")
-
-    ## Converting video to audio
-    print('Converting {}'.format(url))
-    AudioSegment.from_file(video_title+".mp4").export(video_title+".mp3", format="mp3")
-
-    ## Remove video file
-    os.remove(video_title+".mp4")
+    yt.streams.filter().get_highest_resolution().download(filename=video_title+".mp4")
 
 if __name__ == '__main__':
     ## Get urls of videos
@@ -33,10 +25,10 @@ if __name__ == '__main__':
             if url != '':
                 urls.append(url)
 
-    ## Get videos and convert to audios
+    ## Get videos
     url_count = len(urls)
     for i in range(url_count):
         print("({}/{})".format(i+1, url_count))
         url = urls[i]
-        get_mp3(url)
+        get_mp4(url)
 
