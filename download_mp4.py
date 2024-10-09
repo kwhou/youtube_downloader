@@ -26,9 +26,19 @@ if __name__ == '__main__':
                 urls.append(url)
 
     ## Get videos
+    fail_urls = []
     url_count = len(urls)
     for i in range(url_count):
         print("({}/{})".format(i+1, url_count))
         url = urls[i]
-        get_mp4(url)
+        try:
+            get_mp4(url)
+        except Exception as err:
+            print(err)
+            fail_urls.append(url)
+
+    ## Record fail urls
+    with open('fail_urls.txt', 'w') as f:
+        for url in fail_urls:
+            f.write(url + '\n')
 
